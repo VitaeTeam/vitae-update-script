@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
-#Copyright (c) 2018 The Ohmcoin developers
+#Copyright (c) 2018 - 2019 The Ohmcoin developers
+#Copyright (c) 2018 - 2019 The Vitae developers
+
+#maintained and created by A. LaChasse rasalghul at ohmcoin.org
 
 #The MIT License (MIT)
 
@@ -21,8 +24,6 @@
 #OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #THE SOFTWARE.
 
-
-
 #Colors
 yellow='\033[1;31m'
 green='\033[0;32m'
@@ -32,19 +33,19 @@ nc='\033[0m'
 if [[ $EUID -ne 0 ]]; then
 echo -e "${red}Please run as root or use sudo${nc}" 2>&1
 exit 1
-else ohmc-cli stop && \
+else vitae-cli stop && \
 echo "${yellow}Backing up old daemon incase of script bomb${nc}" && \
 sleep 30 && \
 mkdir /usr/local/bin/backup && \
-mv /usr/local/bin/ohmcd /usr/local/bin/backup/ && \
-mv /usr/local/bin/ohmc-cli /usr/local/bin/backup/ && \
-mv /usr/local/bin/ohmc-tx /usr/local/bin/backup/ && \
+mv /usr/local/bin/vitaed /usr/local/bin/backup/ && \
+mv /usr/local/bin/vitae-cli /usr/local/bin/backup/ && \
+mv /usr/local/bin/vitae-tx /usr/local/bin/backup/ && \
 echo -e "${yellow}Updating Vitae daemon files${nc}" && \
 sleep 3 && \
-mv ohmcd /usr/local/bin/ && \
-mv ohmc-cli /usr/local/bin/ && \
-mv ohmc-tx /usr/local/bin/ && \
-echo -e "${green}Ohmcoin files updated${nc}" && \
+mv vitaed /usr/local/bin/ && \
+mv vitae-cli /usr/local/bin/ && \
+mv vitae-tx /usr/local/bin/ && \
+echo -e "${green}Vitae files updated${nc}" && \
 sleep 3 && \
 echo -e "${yellow}Charging laser weapons${nc}" && \
 sleep 3 && \
@@ -54,15 +55,16 @@ echo -e "${yellow}Target Aquired preparing to destroy backup files${nc}" && \
 sleep 3 && \
 echo  -e "${yellow}Firing all lasers${nc}" && \
 sleep 3 && \
-rm -rf /usr/local/bin/backup/ ../ohmc*.tar.gz && \
-echo -e "${red}Target destroyed${nc}" && \
+rm -rf /usr/local/bin/backup/ vitae-* && \
+echo -e "${yellow}Target destroyed${nc}" && \
 sleep 3 && \
 echo -e "${green}You may now start the Vitae daemon normally ie.${nc}" && \
 sleep 3 && \
 echo " " && \
-echo  -e "${red}ohmcd -daemon -txindex${nc}" && \
+echo  -e "${red}vitaed -daemon${nc}" && \
 echo " " && \
 sleep 3 && \
-echo -e "${red}Please make sure to restart your karmanode in your controller wallet to complete the upgrade process${nc}"
+echo -e "${red}Please make sure to restart your masternode in your controller wallet to complete the upgrade process${nc}"
 fi
-exit
+
+rm $0
