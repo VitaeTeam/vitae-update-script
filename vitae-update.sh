@@ -37,7 +37,7 @@ if [[ $EUID -ne 0 ]]; then
 echo -e "${red}Please run as root or use sudo${nc}" 2>&1
 exit 1
 else echo "${yellow}Downloading Update" && \
-curl -LO $url/v$ver/vitae-$ver-x86_64-linux-gnu.tar.gz && \
+wget $url/v$ver/vitae-$ver-x86_64-linux-gnu.tar.gz && \
 echo "${yellow}Decompressing Update" && \
 tar -xvzf vitae-$ver-x86_64-linux-gnu.tar.gz && \
 vitae-cli stop && \
@@ -64,7 +64,7 @@ echo -e "${yellow}Target Aquired preparing to destroy backup files${nc}" && \
 sleep 3 && \
 echo  -e "${yellow}Firing all lasers${nc}" && \
 sleep 3 && \
-rm -rf /usr/local/bin/backup/ vitae-$ver-x86_64-linux-gnu* && \
+rm -rf /usr/local/bin/backup/ vitae-$ver-x86_64-linux-* && \
 echo -e "${yellow}Target destroyed${nc}" && \
 sleep 3 && \
 echo -e "${green}You may now start the Vitae daemon normally ie.${nc}" && \
