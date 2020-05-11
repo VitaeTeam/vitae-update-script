@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #Copyright (c) 2018 - 2019 The Ohmcoin developers
-#Copyright (c) 2018 - 2019 The Vitae developers
+#Copyright (c) 2018 - 2020 The Vitae developers
 
 #maintained and created by A. LaChasse rasalghul at ohmcoin.org
 
@@ -30,10 +30,17 @@ green='\033[0;32m'
 red='\033[0;31m'
 nc='\033[0m'
 
+ver="4.4.1"
+url="https://github.com/VitaeTeam/Vitae/releases/download"
+
 if [[ $EUID -ne 0 ]]; then
 echo -e "${red}Please run as root or use sudo${nc}" 2>&1
 exit 1
-else vitae-cli stop && \
+else echo "${yellow}Downloading Update" && \
+curl -LO $url/v$ver/vitae-$ver-x86_64-linux-gnu.tar.gz && \
+echo "${yellow}Decompressing Update" && \
+tar -xvzf vitae-$ver-x86_64-linux-gnu.tar.gz && \
+vitae-cli stop && \
 echo "${yellow}Backing up old daemon incase of script bomb${nc}" && \
 sleep 30 && \
 mkdir /usr/local/bin/backup && \
@@ -42,9 +49,11 @@ mv /usr/local/bin/vitae-cli /usr/local/bin/backup/ && \
 mv /usr/local/bin/vitae-tx /usr/local/bin/backup/ && \
 echo -e "${yellow}Updating Vitae daemon files${nc}" && \
 sleep 3 && \
-mv vitaed /usr/local/bin/ && \
-mv vitae-cli /usr/local/bin/ && \
-mv vitae-tx /usr/local/bin/ && \
+echo -e "${yellow}Installing Vitae daemon files to /usr/local/bin${nc}" && \
+sleep 3 && \
+mv /vitae-$ver/bin/vitaed /usr/local/bin/ && \
+mv /vitae-$ver/bin/vitae-cli /usr/local/bin/ && \
+mv /vitae-$ver/bin/vitae-tx /usr/local/bin/ && \
 echo -e "${green}Vitae files updated${nc}" && \
 sleep 3 && \
 echo -e "${yellow}Charging laser weapons${nc}" && \
@@ -55,7 +64,7 @@ echo -e "${yellow}Target Aquired preparing to destroy backup files${nc}" && \
 sleep 3 && \
 echo  -e "${yellow}Firing all lasers${nc}" && \
 sleep 3 && \
-rm -rf /usr/local/bin/backup/ vitae-* && \
+rm -rf /usr/local/bin/backup/ vitae-$ver-x86_64-linux-gnu* && \
 echo -e "${yellow}Target destroyed${nc}" && \
 sleep 3 && \
 echo -e "${green}You may now start the Vitae daemon normally ie.${nc}" && \
