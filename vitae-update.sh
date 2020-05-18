@@ -65,7 +65,7 @@ echo -e "${yellow}Target Aquired preparing to destroy backup files${nc}" && \
 sleep 3 && \
 echo  -e "${yellow}Firing all lasers${nc}" && \
 sleep 3 && \
-rm -rf /usr/local/bin/backup/ vitae-$ver-x86_64-linux-* && \
+rm -rf /usr/local/bin/backup/ vitae-$ver-x86_64-linux-* vitae-$ver && \
 echo -e "${yellow}Target destroyed${nc}" && \
 sleep 3 && \
 echo -e "${green}You may now start the Vitae daemon normally ie.${nc}" && \
