@@ -25,7 +25,7 @@
 #THE SOFTWARE.
 
 #Colors
-yellow='\033[1;31m'
+yellow='\033[1;33m'
 green='\033[0;32m'
 red='\033[0;31m'
 nc='\033[0m'
@@ -36,13 +36,14 @@ url="https://github.com/VitaeTeam/Vitae/releases/download"
 if [[ $EUID -ne 0 ]]; then
 echo -e "${red}Please run as root or use sudo${nc}" 2>&1
 exit 1
-else echo "${yellow}Downloading Update" && \
+else echo -e "${yellow}Downloading Update${nc}" && \
 wget $url/v$ver/vitae-$ver-x86_64-linux-gnu.tar.gz && \
-echo "${yellow}Decompressing Update" && \
+echo -e "${yellow}Decompressing Update${nc}" && \
 tar -xvzf vitae-$ver-x86_64-linux-gnu.tar.gz && \
+echo -e "${yellow}Stopping Vitae this may take awhile${nc}" && \
 vitae-cli stop && \
-echo "${yellow}Backing up old daemon incase of script bomb${nc}" && \
-sleep 30 && \
+sleep 60 && \
+echo -e "${yellow}Backing up old daemon incase of script bomb${nc}" && \
 mkdir /usr/local/bin/backup && \
 mv /usr/local/bin/vitaed /usr/local/bin/backup/ && \
 mv /usr/local/bin/vitae-cli /usr/local/bin/backup/ && \
@@ -51,9 +52,9 @@ echo -e "${yellow}Updating Vitae daemon files${nc}" && \
 sleep 3 && \
 echo -e "${yellow}Installing Vitae daemon files to /usr/local/bin${nc}" && \
 sleep 3 && \
-mv /vitae-$ver/bin/vitaed /usr/local/bin/ && \
-mv /vitae-$ver/bin/vitae-cli /usr/local/bin/ && \
-mv /vitae-$ver/bin/vitae-tx /usr/local/bin/ && \
+mv vitae-$ver/bin/vitaed /usr/local/bin/ && \
+mv vitae-$ver/bin/vitae-cli /usr/local/bin/ && \
+mv vitae-$ver/bin/vitae-tx /usr/local/bin/ && \
 echo -e "${green}Vitae files updated${nc}" && \
 sleep 3 && \
 echo -e "${yellow}Charging laser weapons${nc}" && \
