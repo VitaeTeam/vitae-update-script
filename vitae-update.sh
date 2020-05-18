@@ -52,9 +52,9 @@ echo -e "${yellow}Updating Vitae daemon files${nc}" && \
 sleep 3 && \
 echo -e "${yellow}Installing Vitae daemon files to /usr/local/bin${nc}" && \
 sleep 3 && \
-mv /vitae-$ver/bin/vitaed /usr/local/bin/ && \
-mv /vitae-$ver/bin/vitae-cli /usr/local/bin/ && \
-mv /vitae-$ver/bin/vitae-tx /usr/local/bin/ && \
+mv vitae-$ver/bin/vitaed /usr/local/bin/ && \
+mv vitae-$ver/bin/vitae-cli /usr/local/bin/ && \
+mv vitae-$ver/bin/vitae-tx /usr/local/bin/ && \
 echo -e "${green}Vitae files updated${nc}" && \
 sleep 3 && \
 echo -e "${yellow}Charging laser weapons${nc}" && \
