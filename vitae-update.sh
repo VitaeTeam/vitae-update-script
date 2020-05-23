@@ -30,7 +30,7 @@ green='\033[0;32m'
 red='\033[0;31m'
 nc='\033[0m'
 
-ver="4.4.1"
+ver="4.4.2"
 url="https://github.com/VitaeTeam/Vitae/releases/download"
 
 if [[ $EUID -ne 0 ]]; then
